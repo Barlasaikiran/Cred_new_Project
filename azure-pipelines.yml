@@ -23,7 +23,7 @@ stages:
               containerRegistry: 'acr-connection'
               repository: '$(frontendrepository)'
               command: 'buildAndPush'
-              Dockerfile: 'frontend-react\dockerfile'
+              Dockerfile: 'frontend-react/dockerfile'
               buildContext: 'frontend-react'
               tags: |
                 $(tag)
@@ -33,7 +33,7 @@ stages:
               containerRegistry: 'acr-connection'
               repository: '$(userrepository)'
               command: 'buildAndPush'
-              Dockerfile: 'user-service\dockerfile'
+              Dockerfile: 'user-service/dockerfile'
               buildContext: 'user-service'
               tags: |
                 $(tag)
@@ -43,7 +43,7 @@ stages:
               containerRegistry: 'acr-connection'
               repository: '$(paymentrepository)'
               command: 'buildAndPush'
-              Dockerfile: 'payment-service\dockerfile'
+              Dockerfile: 'payment-service/dockerfile'
               buildContext: 'payment-service'
               tags: |
                 $(tag)
