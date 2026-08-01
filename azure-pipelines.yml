@@ -9,7 +9,7 @@ variables:
   userrepository: 'credpay/user-service'
   paymentrepository: 'credpay/payment-service'
 
-tag: '${Build.BuildId}'
+  tag: '${Build.BuildId}'
 
 stages:
   - stage: dockerBuild
