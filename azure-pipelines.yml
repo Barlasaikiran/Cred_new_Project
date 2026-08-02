@@ -2,7 +2,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  acrserviceconnection: 'acr-connection'
+  acrserviceconnection: 'acr-connection-credpay'
   frontendrepository: 'credpay/frontend'
   userrepository: 'credpay/user-service'
   paymentrepository: 'credpay/payment-service'
