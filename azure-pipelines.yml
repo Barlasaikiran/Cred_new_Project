@@ -6,6 +6,7 @@ variables:
   frontendrepository: 'credpay/frontend'
   userrepository: 'credpay/user-service'
   paymentrepository: 'credpay/payment-service'
+  tag:  $(Build.BuildId)
 
 stages:
 - stage: dockerBuild
@@ -22,7 +23,7 @@ stages:
         Dockerfile: frontend-react/dockerfile
         buildContext: frontend-react
         tags: |
-          $(Build.BuildId)
+          $(tag)
           latest
 
     - task: Docker@2
@@ -33,7 +34,7 @@ stages:
         Dockerfile: user-service/dockerfile
         buildContext: user-service
         tags: |
-          $(Build.BuildId)
+          $(tag)
           latest
 
     - task: Docker@2
@@ -44,5 +45,5 @@ stages:
         Dockerfile: payment-service/dockerfile
         buildContext: payment-service
         tags: |
-          $(Build.BuildId)
+          $(tag)
           latest
