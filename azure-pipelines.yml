@@ -9,41 +9,67 @@ variables:
   tag:  $(Build.BuildId)
 
 stages:
-- stage: dockerBuild
-  jobs:
-  - job: buildpushImages
-    steps:
-    - checkout: self
+  - stage: terraform
+    displayName: terraform infra
+    jobs:
+      - job: terraformApply
+        displayName: terraform init & apply
 
-    - task: Docker@2
-      inputs:
-        containerRegistry: $(acrserviceconnection)
-        repository: $(frontendrepository)
-        command: buildAndPush
-        Dockerfile: frontend-react/dockerfile
-        buildContext: frontend-react
-        tags: |
-          $(tag)
-          latest
+        steps:
+          - checkout: self
 
-    - task: Docker@2
-      inputs:
-        containerRegistry: $(acrserviceconnection)
-        repository: $(userrepository)
-        command: buildAndPush
-        Dockerfile: user-service/dockerfile
-        buildContext: user-service
-        tags: |
-          $(tag)
-          latest
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
+          - task: AzureCLI@3
+            inputs:
+              connectionType: 'azureRM'
+              azureSubscription: 'HDFC-Manual-New'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                terraform init
 
-    - task: Docker@2
-      inputs:
-        containerRegistry: $(acrserviceconnection)
-        repository: $(paymentrepository)
-        command: buildAndPush
-        Dockerfile: payment-service/dockerfile
-        buildContext: payment-service
-        tags: |
-          $(tag)
-          latest
+
+
+
+
+
+# - stage: dockerBuild
+#   jobs:
+#   - job: buildpushImages
+#     steps:
+#     - checkout: self
+
+#     - task: Docker@2
+#       inputs:
+#         containerRegistry: $(acrserviceconnection)
+#         repository: $(frontendrepository)
+#         command: buildAndPush
+#         Dockerfile: frontend-react/dockerfile
+#         buildContext: frontend-react
+#         tags: |
+#           $(tag)
+#           latest
+
+#     - task: Docker@2
+#       inputs:
+#         containerRegistry: $(acrserviceconnection)
+#         repository: $(userrepository)
+#         command: buildAndPush
+#         Dockerfile: user-service/dockerfile
+#         buildContext: user-service
+#         tags: |
+#           $(tag)
+#           latest
+
+#     - task: Docker@2
+#       inputs:
+#         containerRegistry: $(acrserviceconnection)
+#         repository: $(paymentrepository)
+#         command: buildAndPush
+#         Dockerfile: payment-service/dockerfile
+#         buildContext: payment-service
+#         tags: |
+#           $(tag)
+#           latest
