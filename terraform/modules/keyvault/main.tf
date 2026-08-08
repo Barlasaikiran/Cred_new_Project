@@ -6,7 +6,10 @@ data "azurerm_key_vault" "kv" {
 resource "azurerm_key_vault_secret" "postgres_host" {
   name         = "postgres-host"
   value        = var.postgres_fqdn
-  key_vault_id = data.azurerm_key_vault.kv.id
+  key_vault_id = data.azurerm_key_vault.kv
+  
+
+  
 }
 resource "azurerm_key_vault_secret" "postgres_username" {
   name         = "postgres-username"
