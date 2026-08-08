@@ -11,6 +11,6 @@ postgres_version = "17"
 postgres_admin_username = "credpayadmin"
 database_name = "credpay"
 log_retention_days = 30
-key_vault_name = "credpaykeyv123"
+key_vault_name = "credpaykeyv12345"
 key_vault_resource_group_name = "capstone-RG"
 
